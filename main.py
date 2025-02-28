@@ -12,12 +12,14 @@ class Game():
 
         self.clock = pygame.time.Clock()
 
-        def run(self):
-            pygame.display.set_caption('Flappy Bird')
-            while True:
-                for event in pygame.event.get():
-                    if event.type == QUIT:
-                        pygame.quit()
-                        sys.exit()
-                pygame.display.update()
-                self.clock.tick(60)
+    def run(self):
+        pygame.display.set_caption('Flappy Bird')
+        while True:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+            pygame.display.update()
+            self.clock.tick(60)
+
+Game().run()
