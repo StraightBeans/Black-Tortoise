@@ -1,6 +1,8 @@
 import pygame, sys
 from pygame.locals import QUIT
 
+# File will contain main game loop, camera, spawning, rendering (some rendering will come from utils file)
+
 pygame.init()
 DISPLAYSURF = pygame.display.set_mode((400, 300))
 pygame.display.set_caption('Hello World!')
