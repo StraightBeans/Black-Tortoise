@@ -3,12 +3,21 @@ from pygame.locals import QUIT
 
 # File will contain main game loop, camera, spawning, rendering (some rendering will come from utils file)
 
-pygame.init()
-DISPLAYSURF = pygame.display.set_mode((400, 300))
-pygame.display.set_caption('Hello World!')
-while True:
-   for event in pygame.event.get():
-       if event.type == QUIT:
-           pygame.quit()
-           sys.exit()
-   pygame.display.update()
+class Game():
+    def __init__(self):
+        pygame.init()
+
+
+        self.screen = pygame.display.set_mode((640, 480))
+
+        self.clock = pygame.time.Clock()
+
+        def run(self):
+            pygame.display.set_caption('Flappy Bird')
+            while True:
+                for event in pygame.event.get():
+                    if event.type == QUIT:
+                        pygame.quit()
+                        sys.exit()
+                pygame.display.update()
+                self.clock.tick(60)
