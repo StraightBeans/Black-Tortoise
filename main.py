@@ -1,19 +1,24 @@
 import pygame, sys
 from pygame.locals import QUIT
 
-# File will contain main game loop, camera, spawning, rendering (some rendering will come from utils file)
+
 
 class Game():
     def __init__(self):
         pygame.init()
 
-
         self.screen = pygame.display.set_mode((640, 480))
-
-        self.clock = pygame.time.Clock()
+        # fill will fill the screen with white every frame so no artifacts are left behind by moving objects
+        self.screen.fill((255, 255, 255)) # replace me with background img later
+        self.clock = pygame.time.Clock() # init clock used to set fps/tick speed at bottom of game loop
 
     def run(self):
+        '''
+        Main game loop.
+        '''
         pygame.display.set_caption('Flappy Bird')
+        # fill will fill the screen with white every frame so no artifacts are left behind by moving objects
+        self.screen.fill((255, 255, 255)) # replace me with background img later
         while True:
             for event in pygame.event.get():
                 if event.type == QUIT:
