@@ -16,8 +16,9 @@ class Bird:
         self.velocity += self.gravity
         self.pos[1] += self.velocity
 
-    def render(self, surf, offset=(0, 0)):
-        pygame.draw.rect(surf, (255, 255, 0), (self.pos[0] - offset[0], self.pos[1] - offset[1], self.size[0], self.size[1]))
+    def render(self, surf):
+        pygame.draw.rect(surf, (255, 255, 0), (self.pos[0], self.pos[1], self.size[0], self.size[1]))
+
 
 class Player(Bird):
     def __init__(self, game, pos, size):
