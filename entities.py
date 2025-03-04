@@ -1,7 +1,4 @@
-import pygame 
-
-# needs a Physics_entity class that will have gravity and other applicable things
-# player with be a child of that class with jump and other functions in it 
+import pygame
 
 class Bird:
     def __init__(self, game, pos, size):
@@ -19,9 +16,6 @@ class Bird:
         self.velocity += self.gravity
         self.pos[1] += self.velocity
 
-    def jump(self):
-        self.velocity = self.jump_strength
-
     def render(self, surf, offset=(0, 0)):
         pygame.draw.rect(surf, (255, 255, 0), (self.pos[0] - offset[0], self.pos[1] - offset[1], self.size[0], self.size[1]))
 
@@ -30,3 +24,6 @@ class Player(Bird):
         super().__init__(game, pos, size)
         self.jumps = True 
         self.score = 0
+    
+    def jump(self):
+        self.velocity = self.jump_strength
