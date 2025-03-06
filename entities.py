@@ -8,6 +8,7 @@ class Bird:
         self.velocity = 0
         self.gravity = 0.5
         self.jump_strength = -8
+        self.offscreen = False
 
     def rect(self):
         return pygame.Rect(self.pos[0], self.pos[1], self.size[0], self.size[1])
@@ -15,6 +16,13 @@ class Bird:
     def update(self):
         self.velocity += self.gravity
         self.pos[1] += self.velocity
+        
+        # check if offscreen
+        rect = self.rect()
+        if (rect.right < 0 or rect.left > self.game.SCREEN_WIDTH or
+            rect.bottom < 0 or rect.top > self.game.SCREEN_HEIGHT):
+            self.offscreen = True
+        print("Offscreen = ", self.offscreen)
 
     def render(self, surf):
         pygame.draw.rect(surf, (255, 255, 0), (self.pos[0], self.pos[1], self.size[0], self.size[1]))
