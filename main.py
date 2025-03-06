@@ -1,33 +1,38 @@
-import pygame, sys
-from pygame.locals import QUIT
-from entities import Player  # Import the Player class
+import pygame
 
-class Game:
-    def __init__(self):
-        pygame.init()
-        self.screen = pygame.display.set_mode((640, 480))
-        self.clock = pygame.time.Clock()
-        # Create a player instance with starting position and size
-        self.player = Player(self, (100, 100), (34, 24))
+class Bird:
+    def __init__(self, game, pos, size):
+        self.game = game
+        self.pos = list(pos)
+        self.size = size
+        self.velocity = 0
+        self.gravity = 0.5
+        self.jump_strength = -8
+        self.offscreen = False
 
-    def run(self):
-        pygame.display.set_caption('Flappy Bird')
-        while True:
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
-                # Input handeling (probably just jump)
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE:
-                        self.player.jump()
+    def rect(self):
+        return pygame.Rect(self.pos[0], self.pos[1], self.size[0], self.size[1])
 
-            # Clear the screen (replace with background later)
-            self.screen.fill((255, 255, 255))
-            # Update and render the player (funcs from enetities.py)
-            self.player.update()
-            self.player.render(self.screen) # render player onto self.screen
-            pygame.display.update()
-            self.clock.tick(60) # FPS max
+    def update(self):
+        self.velocity += self.gravity
+        self.pos[1] += self.velocity
+        
+        # check if offscreen
+        rect = self.rect()
+        if (rect.right < 0 or rect.left > self.game.SCREEN_WIDTH or
+            rect.bottom < 0 or rect.top > self.game.SCREEN_HEIGHT):
+            self.offscreen = True
+        print("Offscreen = ", self.offscreen)
 
-Game().run()
+    def render(self, surf):
+        pygame.draw.rect(surf, (255, 255, 0), (self.pos[0], self.pos[1], self.size[0], self.size[1]))
+
+
+class Player(Bird):
+    def __init__(self, game, pos, size):
+        super().__init__(game, pos, size)
+        self.jumps = True 
+        self.score = 0
+    
+    def jump(self):
+        self.velocity = self.jump_strength
