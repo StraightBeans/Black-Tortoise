@@ -16,7 +16,7 @@ class Bird:
     def update(self):
         self.velocity += self.gravity
         self.pos[1] += self.velocity
-        
+    if self.pos[1] -= self.vol
         # check if offscreen
         rect = self.rect()
         if (rect.right < 0 or rect.left > self.game.SCREEN_WIDTH or
