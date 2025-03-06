@@ -1,5 +1,11 @@
 import pygame
-import random
 
+class Pipe:
+    def __init__(self, pos, img):
+        self.pos = list(pos)
+        self.img = img
 
-# class for pipes that handels spawning with, insert random heights and location, be sure they have modifyable coords 
+class Pipes:
+    def __init__(self, speed):
+        self.pipes = []
+        self.speed = speed
