@@ -1,7 +1,9 @@
-import pygame, sys
+import pygame
+import sys
 from pygame.locals import QUIT
 from entities import Player  # Import the Player class
 from pipe import Pipes       # Import the Pipes class from pipe.py
+from playscreen import PlayScreen  # Import the PlayScreen class
 
 class Game:
     def __init__(self):
@@ -9,11 +11,16 @@ class Game:
         self.SCREEN_WIDTH, self.SCREEN_HEIGHT = 640, 480
         self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
         self.clock = pygame.time.Clock()
+
+        # Show the play screen before the game starts
+        self.play_screen = PlayScreen(self.screen, self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
+        self.play_screen.show()
+
         # Create a player instance with starting position and size
         self.player = Player(self, (100, 100), (34, 24))
         # Instantiate the Pipes class with appropriate parameters
         self.pipes = Pipes(speed=-3, screen_width=self.SCREEN_WIDTH, screen_height=self.SCREEN_HEIGHT)
-        
+
     def run(self):
         pygame.display.set_caption('Flappy Bird')
         while True:
@@ -34,7 +41,7 @@ class Game:
             # Update and render the pipes
             self.pipes.update()
             self.pipes.render(self.screen)
-            
+
             pygame.display.update()
             self.clock.tick(60)  # Max FPS
 
