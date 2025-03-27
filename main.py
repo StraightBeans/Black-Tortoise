@@ -19,7 +19,7 @@ class Game:
         # Create a player instance with starting position and size
         self.player = Player(self, (100, 100), (34, 24))
         # Instantiate the Pipes class with appropriate parameters
-        self.pipes = Pipes(speed=-3, screen_width=self.SCREEN_WIDTH, screen_height=self.SCREEN_HEIGHT)
+        self.pipes = Pipes(speed=-6, screen_width=self.SCREEN_WIDTH, screen_height=self.SCREEN_HEIGHT)
 
     def run(self):
         pygame.display.set_caption('Flappy Bird')
