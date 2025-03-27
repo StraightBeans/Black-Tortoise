@@ -1,4 +1,5 @@
 import pygame
+from background import BACKGROUND_COLOR
 
 class PlayScreen:
     def __init__(self, screen, screen_width, screen_height):
@@ -12,6 +13,7 @@ class PlayScreen:
 
     def show(self):
         while self.running:
+            self.screen.fill(BACKGROUND_COLOR)
             self.screen.fill((255, 255, 255))  # White background
             self.screen.blit(self.title_text, (self.screen_width // 2 - 50, self.screen_height // 3))
             self.screen.blit(self.instruction_text, (self.screen_width // 2 - 100, self.screen_height // 2))
