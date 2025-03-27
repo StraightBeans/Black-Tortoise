@@ -13,6 +13,9 @@ class Game:
         self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT))
         self.clock = pygame.time.Clock()
 
+        self.score = 0
+        self.font = pygame.font.Font(None, 30)
+
         # Show the play screen before the game starts
         self.play_screen = PlayScreen(self.screen, self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
         self.play_screen.show()
@@ -39,9 +42,17 @@ class Game:
             # Update and render the player
             self.player.update()
             self.player.render(self.screen)
+
             # Update and render the pipes
             self.pipes.update()
             self.pipes.render(self.screen)
+
+            # Add to score each frame
+            self.score += 0.01
+            print(int(self.score))
+            # render score
+            score_text = self.font.render(f"Score: {int(self.score)}", True, (0, 0, 0))
+            self.screen.blit(score_text, (10, 10))
 
             pygame.display.update()
             self.clock.tick(60)  # Max FPS
