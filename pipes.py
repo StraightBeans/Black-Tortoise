@@ -25,7 +25,7 @@ class Pipe:
         surf.blit(flipped_pipe, (self.pos[0], self.pos[1] - self.gap - self.image.get_height()))
 
 class Pipes:
-    def __init__(self, speed, screen_width, screen_height, gap=110, frequency=1500, pipe_width=180):
+    def __init__(self, speed, screen_width, screen_height, gap=110, frequency=750, pipe_width=180):
         """
         speed: Horizontal movement speed for the pipes.
         screen_width, screen_height: Dimensions of the game screen.
