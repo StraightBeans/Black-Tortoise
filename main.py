@@ -4,6 +4,7 @@ from pygame.locals import QUIT
 from entities import Player  # Import the Player class
 from pipe import Pipes       # Import the Pipes class from pipe.py
 from playscreen import PlayScreen  # Import the PlayScreen class
+from background import BACKGROUND_COLOR
 
 class Game:
     def __init__(self):
@@ -33,8 +34,8 @@ class Game:
                     if event.key == pygame.K_SPACE:
                         self.player.jump()
 
-            # Clear the screen (replace with background later)
-            self.screen.fill((255, 255, 255))
+            #Background Color
+            self.screen.fill(BACKGROUND_COLOR)
             # Update and render the player
             self.player.update()
             self.player.render(self.screen)
