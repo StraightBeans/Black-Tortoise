@@ -18,6 +18,11 @@ class Game:
         self.play_screen.show()
         self.start_game()
 
+        # score varible refrenced in game loop
+        self.score = 0
+        # font for QOL to use later ex can be seen in game loop
+        self.font = pygame.font.Font(None, 30)
+
     def start_game(self):
         """Initialize the game entities."""
         self.running = True
@@ -49,6 +54,12 @@ class Game:
             else:
                 self.display_game_over()
 
+            # Add to score each frame
+            self.score += 0.01
+            # render score
+            score_text = self.font.render(f"Score: {int(self.score)}", True, (0, 0, 0))
+            self.screen.blit(score_text, (10, 10))
+            
             pygame.display.update()
             self.clock.tick(60)
 
