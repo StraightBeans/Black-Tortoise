@@ -17,15 +17,17 @@ class Collisions:
             player.game_over()
 
     def check_pipe_collision(self, player, pipes):
-        """ Check if the player collides with any pipes. """
-        player_rect = player.rect()
+        """ Check if the player collides with any pipes using masks for precise detection. """
+        player_mask = pygame.mask.from_surface(player.image)
+        player_offset = (int(player.pos[0]), int(player.pos[1]))
 
-        for pipe in pipes.pipes:  # Access the pipes list from Pipes class
-            # Create rects for top and bottom pipes
-            bottom_pipe = pygame.Rect(pipe.pos[0], pipe.pos[1], pipe.pipe_width, pipe.image.get_height())
-            top_pipe = pygame.Rect(pipe.pos[0], pipe.pos[1] - pipe.gap - pipe.image.get_height(), 
-                                 pipe.pipe_width, pipe.image.get_height())
-            
-            # Check collision with either pipe
-            if player_rect.colliderect(bottom_pipe) or player_rect.colliderect(top_pipe):
+        for pipe in pipes.pipes:
+            bottom_pipe_mask = pygame.mask.from_surface(pipe.image)
+            bottom_offset = (int(pipe.pos[0]), int(pipe.pos[1]))
+            top_pipe_mask = pygame.mask.from_surface(pygame.transform.flip(pipe.image, False, True))
+            top_offset = (int(pipe.pos[0]), int(pipe.pos[1] - pipe.gap - pipe.image.get_height()))
+
+            # Check for pixel-perfect collision
+            if (bottom_pipe_mask.overlap(player_mask, (player_offset[0] - bottom_offset[0], player_offset[1] - bottom_offset[1])) or
+                top_pipe_mask.overlap(player_mask, (player_offset[0] - top_offset[0], player_offset[1] - top_offset[1]))):
                 player.game_over()
