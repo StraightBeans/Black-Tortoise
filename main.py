@@ -59,7 +59,7 @@ class Game:
             # render score
             score_text = self.font.render(f"Score: {int(self.score)}", True, (0, 0, 0))
             self.screen.blit(score_text, (10, 10))
-            
+
             pygame.display.update()
             self.clock.tick(60)
 
